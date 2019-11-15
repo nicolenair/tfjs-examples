@@ -38,6 +38,11 @@ export const TEXT_DATA_URLS = {
   'tfjs-code': {
     url: 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7/dist/tf.js',
     needle: 'TensorFlow.js Code (Compiled, 0.11.7)'
+  }, 
+  'ingredients': {
+    url: 'https://gatherdeepcore.s3-us-west-2.amazonaws.com/website-stuff/recipe_concat.txt', //make this better
+    
+    needle: 'ingredients'
   }
 }
 

@@ -49,15 +49,30 @@ limitations under the License.
     width: 98%;
   }
 </style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+
+
+$(document).ready(function(){ 
+  $("#load-text-data").trigger('click'); 
+  console.log("clicked")
+  // window.location.reload()
+});
+
+// $(document).ready(function(){ 
+//   $("#create-or-load-model").trigger('click'); 
+//   console.log("model load")
+// });
+</script>
 
 <body class='tfjs-example-container'>
 
-  <section class='title-area'>
+  <section hidden class='title-area'>
     <h1>TensorFlow.js Text Generation:</h1>
     <p class='subtitle'>Train a LSTM (Long Short Term Memory) model to generate text</p>
   </section>
 
-  <section>
+  <section hidden>
     <p class='section-head'>Description</p>
     <p>
       This example allows you to train a model to generate text in the style of some existing source text.
@@ -66,24 +81,24 @@ limitations under the License.
     </p>
   </section>
 
-  <section hidden>
+  <section hidden> 
     <p class='section-head'>Status</p>
     <div id="app-status">
       Please select a text data source or enter your custom text in the text box below and click <em>"Load source data"</em>.
     </div>
   </section>
 
-  <section>
-    <p class='section-head'>Source Data</p>
-    <select hidden id="text-data-select"></select>
-    <button id="load-text-data">Load source data</button>
-    <div hidden>
-      <textarea class="monospace" id="test-text" value="" rows="10"></textarea>
-    </div>
+  <section hidden>
+    <p hidden class='section-head'>Source Data</p>
+    <select id="text-data-select"></select>
+    <button hidden id="load-text-data">Load source data</button>
+    <div>
+      <textarea hidden class="monospace" id="test-text" value="" rows="10"></textarea>
+    </div> 
   </section>
 
-  <section>
-    <p class='section-head'>Model Loading/Creation</p>
+  <section hidden>
+    <p hidden class='section-head'>Model Loading/Creation</p>
     <div>
       <p>
         <em>
@@ -102,7 +117,7 @@ limitations under the License.
     </div>
   </section>
 
-  <section>
+  <section hidden>
     <p class='section-head'>Model Training</p>
     <p>
       It can take a while to generate an effective model. Try increasing the number of <em>epochs</em> to improve the
@@ -140,7 +155,7 @@ limitations under the License.
     </div>
   </section>
 
-  <section>
+  <section> 
     <p class='section-head'>Text Generation Parameters</p>
     <p>
       To generate text the model needs to have some number of preceding characters from which it continues,
@@ -178,4 +193,4 @@ limitations under the License.
 
 </body>
 
-<script src="index.js"></script>
+<script src="index2.js"></script>

@@ -246,14 +246,15 @@ export function setUpUI() {
     lstmLayersSizesInput.value = lstmLayerSizes;
   }
 
-  function updateTextInputParameters() {
-    Object.keys(TEXT_DATA_URLS).forEach(key => {
-      var opt = document.createElement('option');
-      opt.value = key;
-      opt.innerHTML = TEXT_DATA_URLS[key].needle;
-      textDataSelect.appendChild(opt);
-    });
-  }
+  // function updateTextInputParameters() {
+  //   Object.keys(TEXT_DATA_URLS).forEach(key => {
+  //     var opt = document.createElement('option');
+  //     opt.value = key;
+  //     opt.innerHTML = TEXT_DATA_URLS[key].needle;
+  //     textDataSelect.appendChild(opt);
+  //     console.log(textDataSelect)
+  //   });
+  // }
 
   function hashCode(str) {
     let hash = 5381, i = str.length;
@@ -272,16 +273,99 @@ export function setUpUI() {
   /**
    * Update Text Inputs
    */
-  updateTextInputParameters();
+  // updateTextInputParameters();
 
   /**
    * Wire up UI callbacks.
    */
 
+  // createOrLoadModelButton.addEventListener('click', async () => {
+  //   textDataSelect.disabled = true;
+  //   loadTextDataButton.disabled = true;
+  //   let dataIdentifier = "ingredients";
+  //   const url = TEXT_DATA_URLS[dataIdentifier].url;
+  //   console.log(url)
+  //   if (testText.value.length === 0) {
+  //     try {
+  //       logStatus(`Loading text data from URL: ${url} ...`);
+  //       const response = await fetch(url);
+  //       const textString = await response.text();
+  //       testText.value = textString;
+  //       logStatus(
+  //           `Done loading text data ` +
+  //           `(length=${(textString.length / 1024).toFixed(1)}k). ` +
+  //           `Next, please load or create model.`);
+            
+  //     } catch (err) {
+  //       logStatus('Failed to load text data: ' + err.message);
+  //     }
+  //     if (testText.value.length === 0) {
+  //       logStatus('ERROR: Empty text data.');
+  //       return;
+  //     }
+  //   } else {
+  //     dataIdentifier = hashCode(testText.value);
+  //   }
+  //   textData =
+  //       new TextData(dataIdentifier, testText.value, sampleLen, sampleStep);
+  //   textGenerator = new SaveableLSTMTextGenerator(textData);
+  //   await refreshLocalModelStatus();
+
+  //   createOrLoadModelButton.disabled = true;
+  //   if (textGenerator == null) {
+  //     createOrLoadModelButton.disabled = false;
+  //     logStatus('ERROR: Please load text data set first.');
+  //     return;
+  //   }
+
+  //   if (await textGenerator.checkStoredModelStatus()) {
+  //     // Load locally-saved model.
+  //     logStatus('Loading model from IndexedDB... Please wait.');
+  //     await textGenerator.loadModel();
+  //     updateModelParameterControls(textGenerator.lstmLayerSizes());
+  //     logStatus(
+  //         'Done loading model from IndexedDB. ' +
+  //         'Now you can train the model further or use it to generate text.');
+  //   } else {
+  //     // Create model from scratch.
+  //     logStatus('Creating model... Please wait.');
+  //     const lstmLayerSizes = lstmLayersSizesInput.value.trim().split(',').map(
+  //         s => parseInt(s));
+
+  //     // Sanity check on the LSTM layer sizes.
+  //     if (lstmLayerSizes.length === 0) {
+  //       logStatus('ERROR: Invalid LSTM layer sizes.');
+  //       return;
+  //     }
+  //     for (let i = 0; i < lstmLayerSizes.length; ++i) {
+  //       const lstmLayerSize = lstmLayerSizes[i];
+  //       if (!(lstmLayerSize > 0)) {
+  //         logStatus(
+  //             `ERROR: lstmLayerSizes must be a positive integer, ` +
+  //             `but got ${lstmLayerSize} for layer ${i + 1} ` +
+  //             `of ${lstmLayerSizes.length}.`);
+  //         return;
+  //       }
+  //     }
+
+  //     await textGenerator.createModel(lstmLayerSizes);
+  //     logStatus(
+  //         'Done creating model. ' +
+  //         'Now you can train the model or use it to generate text.');
+  //   }
+
+  //   trainModelButton.disabled = false;
+  //   generateTextButton.disabled = false;
+  // });
+
+  // createOrLoadModelButton.addEventListener('click', async () => {
+
+  // });
+
   loadTextDataButton.addEventListener('click', async () => {
     textDataSelect.disabled = true;
     loadTextDataButton.disabled = true;
-    let dataIdentifier = "ingredients";
+    let dataIdentifier = "ingredients"
     const url = TEXT_DATA_URLS[dataIdentifier].url;
     if (testText.value.length === 0) {
       try {
@@ -307,9 +391,7 @@ export function setUpUI() {
         new TextData(dataIdentifier, testText.value, sampleLen, sampleStep);
     textGenerator = new SaveableLSTMTextGenerator(textData);
     await refreshLocalModelStatus();
-  });
 
-  createOrLoadModelButton.addEventListener('click', async () => {
     createOrLoadModelButton.disabled = true;
     if (textGenerator == null) {
       createOrLoadModelButton.disabled = false;
@@ -355,6 +437,7 @@ export function setUpUI() {
 
     trainModelButton.disabled = false;
     generateTextButton.disabled = false;
+  
   });
 
   deleteModelButton.addEventListener('click', async () => {

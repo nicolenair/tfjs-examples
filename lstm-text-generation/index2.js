@@ -30,7 +30,7 @@ import * as tf from '@tensorflow/tfjs';
 
 import {TextData} from './data';
 import * as model from './model';
-import {onTextGenerationBegin, onTextGenerationChar, onTrainBatchEnd, onTrainBegin, onTrainEpochEnd, setUpUI} from './ui';
+import {onTextGenerationBegin, onTextGenerationChar, onTrainBatchEnd, onTrainBegin, onTrainEpochEnd, setUpUI} from './ui2.js';
 
 /**
  * Class that manages LSTM-based text generation.
@@ -142,7 +142,7 @@ export class SaveableLSTMTextGenerator extends LSTMTextGenerator {
   constructor(textData) {
     super(textData);
     this.modelIdentifier_ = textData.dataIdentifier();
-    this.MODEL_SAVE_PATH_PREFIX_ = 'indexeddb://lstm-text-generation';
+    this.MODEL_SAVE_PATH_PREFIX_ = 'downloads://json_ingr';
     this.modelSavePath_ =
         `${this.MODEL_SAVE_PATH_PREFIX_}/${this.modelIdentifier_}`;
   }
