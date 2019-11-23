@@ -19,8 +19,8 @@
 import * as tf from '@tensorflow/tfjs';
 import * as tfvis from '@tensorflow/tfjs-vis';
 
-import {TEXT_DATA_URLS, TextData} from './data';
-import {SaveableLSTMTextGenerator} from './index';
+import {TEXT_DATA_URLS, TextData} from './data2';
+import {SaveableLSTMTextGenerator} from './index2';
 
 // UI controls.
 const testText = document.getElementById('test-text');
@@ -138,20 +138,20 @@ export function setUpUI() {
    * Refresh the status of locally saved model (in IndexedDB).
    */
   async function refreshLocalModelStatus() {
-    const modelInfo = await textGenerator.checkStoredModelStatus();
-    if (modelInfo == null) {
-      modelAvailableInfo.innerText =
-          `No locally saved model for "${textGenerator.modelIdentifier()}".`;
-      createOrLoadModelButton.textContent = 'Create model';
-      deleteModelButton.disabled = true;
-      enableModelParameterControls();
-    } else {
-      modelAvailableInfo.innerText =
-          `Saved @ ${modelInfo.dateSaved.toISOString()}`;
+    // const modelInfo = await textGenerator.checkStoredModelStatus();
+    // if (modelInfo == null) {
+    //   modelAvailableInfo.innerText =
+    //       `No locally saved model for "${textGenerator.modelIdentifier()}".`;
+    //   createOrLoadModelButton.textContent = 'Create model';
+    //   deleteModelButton.disabled = true;
+    //   enableModelParameterControls();
+    // } else {
+    //   modelAvailableInfo.innerText =
+    //       `Saved @ ${modelInfo.dateSaved.toISOString()}`;
       createOrLoadModelButton.textContent = 'Load model';
       deleteModelButton.disabled = false;
       disableModelParameterControls();
-    }
+    // }
     createOrLoadModelButton.disabled = false;
   }
 
@@ -363,6 +363,7 @@ export function setUpUI() {
   // });
 
   loadTextDataButton.addEventListener('click', async () => {
+    // await textGenerator.loadModel();
     textDataSelect.disabled = true;
     loadTextDataButton.disabled = true;
     let dataIdentifier = "ingredients"
@@ -399,41 +400,41 @@ export function setUpUI() {
       return;
     }
 
-    if (await textGenerator.checkStoredModelStatus()) {
-      // Load locally-saved model.
-      logStatus('Loading model from IndexedDB... Please wait.');
+    // if (await textGenerator.checkStoredModelStatus()) {
+    //   // Load locally-saved model.
+    //   logStatus('Loading model from IndexedDB... Please wait.');
       await textGenerator.loadModel();
       updateModelParameterControls(textGenerator.lstmLayerSizes());
       logStatus(
           'Done loading model from IndexedDB. ' +
           'Now you can train the model further or use it to generate text.');
-    } else {
-      // Create model from scratch.
-      logStatus('Creating model... Please wait.');
-      const lstmLayerSizes = lstmLayersSizesInput.value.trim().split(',').map(
-          s => parseInt(s));
+    // } else {
+    //   // Create model from scratch.
+    //   logStatus('Creating model... Please wait.');
+    //   const lstmLayerSizes = lstmLayersSizesInput.value.trim().split(',').map(
+    //       s => parseInt(s));
 
-      // Sanity check on the LSTM layer sizes.
-      if (lstmLayerSizes.length === 0) {
-        logStatus('ERROR: Invalid LSTM layer sizes.');
-        return;
-      }
-      for (let i = 0; i < lstmLayerSizes.length; ++i) {
-        const lstmLayerSize = lstmLayerSizes[i];
-        if (!(lstmLayerSize > 0)) {
-          logStatus(
-              `ERROR: lstmLayerSizes must be a positive integer, ` +
-              `but got ${lstmLayerSize} for layer ${i + 1} ` +
-              `of ${lstmLayerSizes.length}.`);
-          return;
-        }
-      }
+    //   // Sanity check on the LSTM layer sizes.
+    //   if (lstmLayerSizes.length === 0) {
+    //     logStatus('ERROR: Invalid LSTM layer sizes.');
+    //     return;
+    //   }
+    //   for (let i = 0; i < lstmLayerSizes.length; ++i) {
+    //     const lstmLayerSize = lstmLayerSizes[i];
+    //     if (!(lstmLayerSize > 0)) {
+    //       logStatus(
+    //           `ERROR: lstmLayerSizes must be a positive integer, ` +
+    //           `but got ${lstmLayerSize} for layer ${i + 1} ` +
+    //           `of ${lstmLayerSizes.length}.`);
+    //       return;
+    //     }
+    //   }
 
-      await textGenerator.createModel(lstmLayerSizes);
-      logStatus(
-          'Done creating model. ' +
-          'Now you can train the model or use it to generate text.');
-    }
+    //   await textGenerator.createModel(lstmLayerSizes);
+    //   logStatus(
+    //       'Done creating model. ' +
+    //       'Now you can train the model or use it to generate text.');
+    // }
 
     trainModelButton.disabled = false;
     generateTextButton.disabled = false;

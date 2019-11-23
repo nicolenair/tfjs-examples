@@ -139,19 +139,19 @@ export function setUpUI() {
    */
   async function refreshLocalModelStatus() {
     const modelInfo = await textGenerator.checkStoredModelStatus();
-    if (modelInfo == null) {
-      modelAvailableInfo.innerText =
-          `No locally saved model for "${textGenerator.modelIdentifier()}".`;
-      createOrLoadModelButton.textContent = 'Create model';
-      deleteModelButton.disabled = true;
-      enableModelParameterControls();
-    } else {
-      modelAvailableInfo.innerText =
-          `Saved @ ${modelInfo.dateSaved.toISOString()}`;
+    // if (modelInfo == null) {
+    //   modelAvailableInfo.innerText =
+    //       `No locally saved model for "${textGenerator.modelIdentifier()}".`;
+    //   createOrLoadModelButton.textContent = 'Create model';
+    //   deleteModelButton.disabled = true;
+    //   enableModelParameterControls();
+    // } else {
+      // modelAvailableInfo.innerText =
+      //     `Saved @ ${modelInfo.dateSaved.toISOString()}`;
       createOrLoadModelButton.textContent = 'Load model';
       deleteModelButton.disabled = false;
       disableModelParameterControls();
-    }
+    // }
     createOrLoadModelButton.disabled = false;
   }
 
@@ -321,6 +321,7 @@ export function setUpUI() {
       // Load locally-saved model.
       logStatus('Loading model from IndexedDB... Please wait.');
       await textGenerator.loadModel();
+      console.log("load")
       updateModelParameterControls(textGenerator.lstmLayerSizes());
       logStatus(
           'Done loading model from IndexedDB. ' +

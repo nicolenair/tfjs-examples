@@ -163,11 +163,11 @@ export class SaveableLSTMTextGenerator extends LSTMTextGenerator {
    *   number or an non-empty array of numbers.
    */
   async loadModel(lstmLayerSizes) {
-    this.model = await tf.loadLayersModel("indexeddb://lstm-text-generation/ingredients");
+    console.log("loading")
+    this.model = await tf.loadLayersModel("https://recipegen.s3-us-west-2.amazonaws.com/ingredients.json");
     // const modelsInfo = await tf.io.listModels();
     // if (this.modelSavePath_ in modelsInfo) {
     //   console.log(`Loading existing model...`);
-      
     //   // console.log(`Loaded model from ${this.modelSavePath_}`);
     // } else {
     //   throw new Error(
@@ -185,7 +185,7 @@ export class SaveableLSTMTextGenerator extends LSTMTextGenerator {
     if (this.model == null) {
       throw new Error('Cannot save model before creating model.');
     } else {
-      return await this.model.save(this.modelSavePath_);
+      return await this.model.save("downloads://ingredients.json");
     }
   }
 

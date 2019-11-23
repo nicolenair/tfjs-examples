@@ -28,7 +28,7 @@
 
 import * as tf from '@tensorflow/tfjs';
 
-import {TextData} from './data';
+import {TextData} from './data2';
 import * as model from './model';
 import {onTextGenerationBegin, onTextGenerationChar, onTrainBatchEnd, onTrainBegin, onTrainEpochEnd, setUpUI} from './ui2.js';
 
@@ -163,7 +163,8 @@ export class SaveableLSTMTextGenerator extends LSTMTextGenerator {
    *   number or an non-empty array of numbers.
    */
   async loadModel(lstmLayerSizes) {
-    this.model = await tf.loadLayersModel("indexeddb://lstm-text-generation/ingredients");
+    console.log("load")
+    this.model = await tf.loadLayersModel("https://recipegen.s3-us-west-2.amazonaws.com/ingredients.json");
     // const modelsInfo = await tf.io.listModels();
     // if (this.modelSavePath_ in modelsInfo) {
     //   console.log(`Loading existing model...`);

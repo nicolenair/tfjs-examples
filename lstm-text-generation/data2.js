@@ -40,8 +40,7 @@ export const TEXT_DATA_URLS = {
     needle: 'TensorFlow.js Code (Compiled, 0.11.7)'
   }, 
   'ingredients': {
-    url: 'https://gatherdeepcore.s3-us-west-2.amazonaws.com/website-stuff/recipe-short.txt', //make this better
-    
+    url: 'https://recipegen.s3-us-west-2.amazonaws.com/placeholder.txt', //make this better
     needle: 'ingredients'
   }
 
@@ -165,7 +164,7 @@ export class TextData {
     return this.charSet_[index];
   }
 
-  /**
+  /**har
    * Convert text string to integer indices.
    *
    * @param {string} text Input text.

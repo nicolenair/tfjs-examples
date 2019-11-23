@@ -56,6 +56,7 @@ limitations under the License.
 $(document).ready(function(){ 
   $("#load-text-data").trigger('click'); 
   console.log("clicked")
+  // await fetch("https://recipegen.s3-us-west-2.amazonaws.com/ingredients.json");
   // window.location.reload()
 });
 
@@ -156,8 +157,8 @@ $(document).ready(function(){
   </section>
 
   <section> 
-    <p class='section-head'>Text Generation Parameters</p>
-    <p>
+    <p hidden class='section-head'>Text Generation Parameters</p>
+    <p hidden >
       To generate text the model needs to have some number of preceding characters from which it continues,
       we call these characters the <em>seed text</em>. You can type one in, or we will extract a random substring from
       the input text to be the seed text. Note that the seed text must be at least 40 charachters long.

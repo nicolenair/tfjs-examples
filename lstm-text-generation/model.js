@@ -110,7 +110,8 @@ export async function generateText(
   sentenceIndices = sentenceIndices.slice();
 
   let generated = '';
-  while (generated.length < length) {
+  while (generated.length < length && generated[generated.length-1]!="\n") {
+    console.log
     // Encode the current input sequence as a one-hot Tensor.
     const inputBuffer =
         new tf.TensorBuffer([1, sampleLen, charSetSize]);
@@ -126,8 +127,9 @@ export async function generateText(
     const output = model.predict(input);
 
     // Sample randomly based on the probability values.
+    const char = ["↵", "p", "e", "n", ",", " ", "c", "h", "s", "a", "u", "d", "r", "g", "y", "i", "o", "t", "l", "w", "b", "-", "f", "m", "k", "1", "4", "(", "2", "3", ")", "/", "A", "v", "F", "C", "W", "j", "z", "J", "O", "x", "S", "$", "6", ".", "9", "0", "I", "K", "G", "P", "q", "M", "7", "&", "D", "5", "L", "N", "T", "E", "R", "U", "H", "*", "V", "B", "'", "8", "Y", "!", "+", "%", ":", '"', "Z", "X", "=", "\\", 'Q', ']', ';', '~', '[', "`", "#", "<", ">", "?", "}", "{", "@", "|", "ú", "_", "^", "Ê"]
     const winnerIndex = sample(tf.squeeze(output), temperature);
-    const winnerChar = textData.getFromCharSet(winnerIndex);
+    const winnerChar = char[winnerIndex];
     if (onTextGenerationChar != null) {
       await onTextGenerationChar(winnerChar);
     }
