@@ -1,10 +1,6 @@
 # Nicole's Modifications
 This repo has been modified to only support the Recipe 1M+ dataset. In order to merely deploy my pre-trained model for recipe generation, please switch the yarn watch command to use index2.html instead of index.html
 
-# TensorFlow.js Example: Train LSTM to Generate Text
-
-[See this example live!](https://storage.googleapis.com/tfjs-examples/lstm-text-generation/dist/index.html)
-
 ## Overview
 
 This example illustrates how to use TensorFlow.js to train a LSTM model to
