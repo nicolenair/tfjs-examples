@@ -1,5 +1,5 @@
 # Nicole's Modifications
-This repo has been modified to only support the Recipe 1M+ dataset. In order to merely deploy my pre-trained model for recipe generation, please switch the yarn watch command to use index2.html instead of index.html. Otherwise, the README stands.
+This repo has been modified so that the yarn watch demo only supports the the recipe generation dataset. In order to merely deploy my pre-trained model for recipe generation, please switch the yarn watch command to use index2.html instead of index.html. Otherwise, the README stands.
 
 ## Overview
 
